@@ -38,6 +38,8 @@ namespace Game.App
         private string PrziesThreePicture = Source + "rewards.png";
         private string PrziesFourPicture = Source + "rewards.png";
         private string PrziesFivePicture = Source + "rewards.png";
+        private string PrizePicture = Source + "question.png";
+        private string PrizeSelectedPicture = Source + "question.png";
 
         private readonly Engine engine;
         private readonly Button[] answers;
@@ -84,9 +86,57 @@ namespace Game.App
 
             currentLevel = engine.Game.GetCurrentLevel(levelCount);
 
+            LoadPrizes();
+
             LoadQuestion();
 
             levelCount++;
+        }
+
+        private void LoadPrizes()
+        {
+            PanelImages.Children.Clear();
+            PanelLabels.Children.Clear();
+
+            for (int i = 0; i < engine.Prizes.Length; i++)
+            {                
+                Label label = new Label();
+                label.Content = engine.Prizes[i];
+                label.Width = 150;
+                label.FontSize = 18;
+                label.Height = 45;
+                label.Foreground = Brushes.White;
+
+                PanelLabels.Children.Add(label);
+                
+                //----------------< add_Image() >----------------
+                Image newImage = new Image();
+
+                //< source >
+                BitmapImage src = new BitmapImage();
+                src.BeginInit();
+
+                if (currentLevel.CurrentCount == i)
+                {
+                    src.UriSource = new Uri(PrizePicture, UriKind.RelativeOrAbsolute);
+                }
+                else
+                {
+                    src.UriSource = new Uri(PrizeSelectedPicture, UriKind.RelativeOrAbsolute);
+                }
+                
+                src.EndInit();
+                newImage.Source = src;
+                //</ source >
+
+                newImage.Stretch = Stretch.Uniform;
+                newImage.Height = 45;
+                newImage.Width = 550;
+
+                //< add >
+                PanelImages.Children.Add(newImage);
+
+            }
         }
 
         private void LoadQuestion()
@@ -102,28 +152,11 @@ namespace Game.App
 
             PlaySound(StartQuestionSound);
 
-            ChangePrize();
+            LoadPrizes();
 
             QuestionLabel.Text = currentLevel.Current.QuestionText;
 
             GenerateAnswers(currentLevel.Current);
-        }
-
-        private void ChangePrize()
-        {
-            string[] prizes =
-            {
-                PrziesOnePicture,
-                PrziesTwoPicture,
-                PrziesThreePicture,
-                PrziesFourPicture,
-                PrziesFivePicture
-            };
-            string path = prizes[currentLevel.CurrentCount];
-
-            Fifty.BeginInit();
-            Fifty.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
-            Fifty.EndInit();
         }
 
         private void GenerateAnswers(IQuestion currentQuestion)
@@ -143,21 +176,15 @@ namespace Game.App
         {
             string path = FiftyPicture;
 
-            Fifty.BeginInit();
-            Fifty.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
-            Fifty.EndInit();
+            FiftyPictureWin.BeginInit();
+            FiftyPictureWin.Source = new BitmapImage(new Uri(FiftyPicture, UriKind.RelativeOrAbsolute));
+            FiftyPictureWin.EndInit();
 
             path = AskTheAudiencePicture;
 
             People.BeginInit();
             People.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
             People.EndInit();
-
-            path = PrziesNonePicture;
-
-            Prizes.BeginInit();
-            Prizes.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
-            Prizes.EndInit();
         }
 
         private void fiftyHelper_MouseDown(object sender, MouseEventArgs e)
@@ -166,26 +193,26 @@ namespace Game.App
 
             PlaySound(FiftyFiftySound);
 
-            Fifty.BeginInit();
-            Fifty.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
-            Fifty.EndInit();
+            FiftyPictureWin.BeginInit();
+            FiftyPictureWin.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+            FiftyPictureWin.EndInit();
 
             EliminateTwoAnswers();
         }
 
         private void PlaySound(string soundDir, bool looping = false)
         {
-            this.currentSound = new SoundPlayer(soundDir);
+            currentSound = new SoundPlayer(soundDir);
 
             if (MusicOn)
             {
                 if (looping)
                 {
-                    this.currentSound.PlayLooping();
+                    currentSound.PlayLooping();
                 }
                 else
                 {
-                    this.currentSound.Play();
+                    currentSound.Play();
                 }
             }
         }
@@ -226,7 +253,7 @@ namespace Game.App
 
         private async void GenerateAnswerOutput(string answer, Button answerButton)
         {
-            int miliSec = 7000;
+            int miliSec = 8000;
             PlaySound(FinalAnswerSound);
 
             ColorButton(Brushes.Orange, answerButton);
@@ -262,7 +289,7 @@ namespace Game.App
         {
             int milisec = 200;
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 13; i++)
             {
                 answerButton.Background = Brushes.White;
                 answerButton.Foreground = Brushes.Black;
@@ -305,13 +332,13 @@ namespace Game.App
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.MusicOn)
+            if (MusicOn)
             {
-                this.currentSound.Stop();
+                currentSound.Stop();
             }
             else
             {
-                this.currentSound.Play();
+                currentSound.Play();
             }
             MusicOn = !MusicOn;
         }

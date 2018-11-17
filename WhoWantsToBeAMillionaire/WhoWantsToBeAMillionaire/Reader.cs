@@ -13,7 +13,7 @@ namespace Game.App
 
         public Reader()
         {
-            this.currentLine = 1;
+            this.currentLine = 2;
 
             this.Open();
         }

@@ -27,20 +27,23 @@ namespace Game.App
             this.questionFactory = new QuestionFactory();
             this.reader = new Reader();
 
-            SetCounts();
+            SetCountsAndPrizes();
 
             this.Game = LoadGame();
         }
+
+        public string[] Prizes { get; private set; }
 
         public int GetCountOfLevels()
         {
             return this.countOfLevels;
         }
 
-        private void SetCounts()
+        private void SetCountsAndPrizes()
         {
             string file = questionsTxt;
             int[] counts = File.ReadAllLines(file)[0].Split().Select(int.Parse).ToArray();
+            this.Prizes = File.ReadAllLines(file)[1].Split().ToArray();
 
             this.countOfLevels = counts[0];
             this.countOfQuestionsInLevel = counts[1];

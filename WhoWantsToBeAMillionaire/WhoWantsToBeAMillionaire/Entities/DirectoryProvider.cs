@@ -11,7 +11,7 @@ namespace Game.App.Entities
     {
         public static string CurrentDirectory()
         {
-            return @"D:\VSProjects\WhoWantsToBecomeAMillionaire\Game.App\Resources\";
+            return @"../../Resources/";
         }
     }
 }

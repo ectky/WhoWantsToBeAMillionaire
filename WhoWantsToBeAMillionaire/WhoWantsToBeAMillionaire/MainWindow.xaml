@@ -22,18 +22,15 @@
         <Image Source="pack://application:,,,/Resources/person-male.png"
                Grid.Row="0" Grid.ColumnSpan="2"/>
         <Image Source="pack://application:,,,/Resources/fifty.png"
-            Grid.Row="0" Name="Fifty"  MouseDown="fiftyHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,23,0,0"/>
+            Grid.Row="0" Name="FiftyPictureWin"  MouseDown="fiftyHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,23,0,0"/>
         <Image Source="pack://application:,,,/Resources/question.png"
                Grid.Row="1" Margin="0,0,0,200" Grid.ColumnSpan="2"/>
         <Image Source="Resources/people.png"
                Grid.Row="0" Name="People"  MouseDown="peopleHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,119,0,0"/>
-        <Image Source="pack://application:,,,/Resources/logoTvoqChas.jpg" Grid.Row="0" 
-               HorizontalAlignment="Left" Height="101" VerticalAlignment="Top" Width="261" Margin="174.785,0,0,0" Grid.Column="1"/>
-        <Image Name="Prizes" Source="pack://application:,,,/Resources/rewards.png" Grid.Row="0" Height="192" VerticalAlignment="Top" Width="472" Margin="118.785,119,0,0" HorizontalAlignment="Left" Grid.Column="1"/>
         <Button Content="Button" Name="AnswerA"  HorizontalAlignment="Left" Margin="99,192,0,0" 
                 Grid.Row="1" VerticalAlignment="Top" Width="535" Background="Black" 
                 Height="48" Foreground="White" BorderBrush="#FF668DC9" FontSize="18" 
-                BorderThickness="6,5,5,5" Click="AnswerA_Click">
+                BorderThickness="6,5,5,5" Click="AnswerA_Click" RenderTransformOrigin="0.5,0.5">
         </Button>
 
         <Button Content="Button" Name="AnswerB" HorizontalAlignment="Left" 
@@ -63,5 +60,8 @@
         <Canvas Margin="191,46,187,254" Grid.Row="1" Grid.ColumnSpan="2"/>
         <TextBlock Name="QuestionLabel"  HorizontalAlignment="Left" Margin="191,46,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="68" Width="1061" Foreground="#FFFDFDFD" FontSize="18" Grid.ColumnSpan="2"/>
         <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="493,23,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <WrapPanel Name="PanelImages" Grid.Column="1" HorizontalAlignment="Left" Height="309" Margin="59,49,0,0" VerticalAlignment="Top" Width="474"/>
+        <WrapPanel x:Name="PanelLabels" Grid.Column="1" HorizontalAlignment="Left" Height="277" Margin="211,49,0,0" VerticalAlignment="Top" Width="255">
+        </WrapPanel>
     </Grid>
 </Window>
