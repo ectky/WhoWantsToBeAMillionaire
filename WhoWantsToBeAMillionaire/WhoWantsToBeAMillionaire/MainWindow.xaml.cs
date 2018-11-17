@@ -17,6 +17,7 @@ using System.Threading;
 using Game.App.Contracts;
 using Game.App.Entities;
 using WhoWantsToBeAMillionaire;
+using Game.Data.Services.Contracts;
 
 namespace Game.App
 {
@@ -50,9 +51,15 @@ namespace Game.App
         private ILevel currentLevel;
         private Button[] answers;
 
-        public MainWindow()
+        private readonly IPlayersService playersService;
+        private readonly IGamesService gamesService;
+
+        public MainWindow(IPlayersService playersService, IGamesService gamesService)
         {
             InitializeComponent();
+
+            this.playersService = playersService;
+            this.gamesService = gamesService;
 
             this.answers = new[] { AnswerA, AnswerB, AnswerC, AnswerD };
             this.engine = new Engine();
@@ -64,11 +71,11 @@ namespace Game.App
         {
             if (levelCount >= this.engine.Game.Size - 1)
             {
-                EndGame end = new EndGame();
+                EndGame end = new EndGame(playersService, gamesService);
                 end.ShowDialog();
                 this.Close();
             }
-            var regForm = new RegisterPlayer();
+            var regForm = new RegisterPlayer(playersService, gamesService);
 
             regForm.ShowDialog();
 
@@ -209,6 +216,9 @@ namespace Game.App
                 SoundPlayer sound = new SoundPlayer(RightAnswerSound);
                 sound.Play();
 
+                //adds a point to the current players score
+                this.gamesService.AddPointToPlayersScore();
+
                 Thread.Sleep(10000);
 
                 LoadQuestion();
@@ -239,6 +249,10 @@ namespace Game.App
                 AnswerB.Background = Brushes.Green;
                 SoundPlayer sound = new SoundPlayer(RightAnswerSound);
                 sound.Play();
+
+                //adds a point to the current players score
+                this.gamesService.AddPointToPlayersScore();
+
                 Thread.Sleep(10000);
 
                 LoadQuestion();
@@ -269,6 +283,10 @@ namespace Game.App
                 AnswerC.Background = Brushes.Green;
                 SoundPlayer sound = new SoundPlayer(RightAnswerSound);
                 sound.Play();
+
+                //adds a point to the current players score
+                this.gamesService.AddPointToPlayersScore();
+
                 Thread.Sleep(10000);
 
                 LoadQuestion();
@@ -299,6 +317,9 @@ namespace Game.App
                 AnswerD.Background = Brushes.Green;
                 SoundPlayer sound = new SoundPlayer(RightAnswerSound);
                 sound.Play();
+
+                //adds a point to the current players score
+                this.gamesService.AddPointToPlayersScore();
 
                 Thread.Sleep(10000);
                 LoadQuestion();

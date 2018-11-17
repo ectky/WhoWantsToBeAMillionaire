@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Data.Services;
+using Game.Data.Services.Contracts;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using WhoWantsToBeAMillionaire.Services;
-using WhoWantsToBeAMillionaire.Services.Contracts;
 
 namespace WhoWantsToBeAMillionaire
 {
@@ -22,19 +10,24 @@ namespace WhoWantsToBeAMillionaire
     public partial class RegisterPlayer : Window
     {
         private readonly IPlayersService playersService;
+        private readonly IGamesService gamesService;
 
-        public RegisterPlayer()
+        public RegisterPlayer(IPlayersService playersService, IGamesService gamesService)
         {
             InitializeComponent();
 
-            this.playersService = new PlayersService();
+            this.playersService = playersService;
+            this.gamesService = gamesService;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameTextBox.Text;
 
-            //playersService.LogPlyerWithUsername(username);
+            playersService.LogPlyerWithUsername(username);
+            gamesService.LogGame();
+
+            this.Close();
         }
     }
 }

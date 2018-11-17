@@ -17,7 +17,7 @@ namespace Game.Data
 
         public GameDbContext(DbContextOptions options)
         {
-
+            
         }
 
         public DbSet<Player> Players { get; set; }

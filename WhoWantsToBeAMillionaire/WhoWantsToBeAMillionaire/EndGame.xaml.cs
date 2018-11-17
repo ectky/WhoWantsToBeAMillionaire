@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Data.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -20,17 +21,23 @@ namespace Game.App
     /// </summary>
     public partial class EndGame : Window
     {
-        public EndGame()
+        private readonly IPlayersService playersService;
+        private readonly IGamesService gamesService;
+
+        public EndGame(IPlayersService playersService, IGamesService gamesService)
         {
             InitializeComponent();
             SoundPlayer sound = new SoundPlayer
                 (@"D:\VSProjects\WhoWantsToBecomeAMillionaire\Game.App\Resources\close.wav");
             sound.Play();
+
+            this.playersService = playersService;
+            this.gamesService = gamesService;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
+            MainWindow main = new MainWindow(playersService, gamesService);
             main.ShowDialog();
         }
 

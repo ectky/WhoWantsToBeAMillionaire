@@ -59,8 +59,6 @@
     <Compile Include="RegisterPlayer.xaml.cs">
       <DependentUpon>RegisterPlayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\Contracts\IPlayersService.cs" />
-    <Compile Include="Services\PlayersService.cs" />
     <Compile Include="StartUpWindow.xaml.cs">
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
@@ -183,6 +181,10 @@
     <ProjectReference Include="..\Game.Data\Game.Data.csproj">
       <Project>{12576190-94dc-4a00-891a-272701281309}</Project>
       <Name>Game.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Models\Game.Models.csproj">
+      <Project>{BD1B95D9-4A97-4D03-94F3-2C6D8D15B6C3}</Project>
+      <Name>Game.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

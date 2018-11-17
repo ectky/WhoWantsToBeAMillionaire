@@ -1,4 +1,6 @@
 ﻿using Game.App.Entities;
+using Game.Data.Services;
+using Game.Data.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,8 @@ namespace Game.App
 
         private string mainthemeSound = Source + "main theme.wav";
         private readonly SoundPlayer sound;
+        private readonly IPlayersService playersService;
+        private readonly IGamesService gamesService;
 
         public StartUpWindow()
         {
@@ -33,11 +37,14 @@ namespace Game.App
             sound = new SoundPlayer
                 (mainthemeSound);
             sound.Play();
+
+            this.playersService = new PlayersService();
+            this.gamesService = new GamesService(playersService);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
+            MainWindow main = new MainWindow(playersService, gamesService);
             main.Show();
             this.Close();
         }
