@@ -1,0 +1,62 @@
+﻿<Window x:Class="Game.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game.App"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        WindowState="Maximized" d:DesignWidth="1470.405" d:DesignHeight="767.131" Closed="Window_Closed">
+    <Window.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Resources/background.jpg"></ImageBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Source="pack://application:,,,/Resources/person-male.png"
+               Grid.Row="0"/>
+        <Image Source="pack://application:,,,/Resources/fifty.png"
+            Grid.Row="0" Name="Fifty"  MouseDown="fiftyHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,23,0,0"/>
+        <Image Source="pack://application:,,,/Resources/question.png"
+               Grid.Row="1" Margin="0,0,0,200"/>
+        <Image Source="Resources/people.png"
+               Grid.Row="0" Name="People"  MouseDown="peopleHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,119,0,0"/>
+        <Image Source="pack://application:,,,/Resources/logoTvoqChas.jpg" Grid.Row="0" 
+               HorizontalAlignment="Left" Height="101" VerticalAlignment="Top" Width="261" Margin="1046,0,0,0"/>
+        <Image Name="Prizes" Source="pack://application:,,,/Resources/rewards.png" Grid.Row="0" Height="192" VerticalAlignment="Top" Width="472" Margin="990,119,0,0" HorizontalAlignment="Left"/>
+        <Button Content="Button" Name="AnswerA"  HorizontalAlignment="Left" Margin="99,192,0,0" 
+                Grid.Row="1" VerticalAlignment="Top" Width="535" Background="Black" 
+                Height="48" Foreground="White" BorderBrush="#FF668DC9" FontSize="18" 
+                BorderThickness="6,5,5,5" Click="AnswerA_Click">
+        </Button>
+
+        <Button Content="Button" Name="AnswerB" HorizontalAlignment="Left" 
+                Margin="740,192,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                Width="535" Background="Black" Height="48" Foreground="White" 
+                BorderBrush="#FF668DC9" FontSize="18" BorderThickness="6,5,5,5" 
+                Click="AnswerB_Click"/>
+        <Button Content="Button" Name="AnswerC" HorizontalAlignment="Left" 
+                Margin="99,268,0,0" Grid.Row="1" VerticalAlignment="Top" Width="535" 
+                Background="Black" Height="48" Foreground="White" BorderBrush="#FF668DC9" 
+                FontSize="18" BorderThickness="6,5,5,5" SnapsToDevicePixels="True" 
+                Click="AnswerC_Click"/>
+        <Button Content="Button" Name="AnswerD" HorizontalAlignment="Left" 
+                Margin="740,268,0,0" Grid.Row="1" VerticalAlignment="Top" Width="535" 
+                Background="Black" Height="48" Foreground="White" BorderBrush="#FF668DC9" 
+                FontSize="18" BorderThickness="6,5,5,5" 
+                Click="AnswerD_Click"/>
+
+        <Label Content="Математика не за всеки XIA клас" Margin="0,321,10,5" Grid.Row="1" 
+               VerticalAlignment="Center" Foreground="White" Height="42" Width="438" 
+               FontSize="22" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" 
+               HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Canvas Margin="191,46,187,254" Grid.Row="1"/>
+        <TextBlock Name="QuestionLabel"  HorizontalAlignment="Left" Margin="191,46,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="68" Width="1061" Foreground="#FFFDFDFD" FontSize="18"/>
+    </Grid>
+</Window>

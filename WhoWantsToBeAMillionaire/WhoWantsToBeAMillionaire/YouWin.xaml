@@ -1,0 +1,52 @@
+﻿<Window x:Class="Game.App.YouWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game.App"
+        mc:Ignorable="d"
+        Title="YouWin" Height="767" Width="1470" Activated="Window_Activated">
+
+    <Window.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Resources/background.jpg"></ImageBrush>
+    </Window.Background>
+    <Grid RenderTransformOrigin="0.432,0.494">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="917*"/>
+            <ColumnDefinition Width="545*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="pack://application:,,,/Resources/logo.png"
+               Grid.Row="0" HorizontalAlignment="Left" Height="631" Margin="397,0,0,10" VerticalAlignment="Bottom" Width="646" Grid.ColumnSpan="2"/>
+
+        <Image Source="pack://application:,,,/Resources/confeti.png" Grid.Row="0" HorizontalAlignment="Left" Height="1160" Margin="773,66,-391,-490" VerticalAlignment="Top" Width="1080" Grid.ColumnSpan="2"/>
+        <Image Source="pack://application:,,,/Resources/confeti.png" Grid.Row="0" HorizontalAlignment="Left" Height="1160" Margin="-443,98,0,-521" VerticalAlignment="Top" Width="1080" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.546"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source="pack://application:,,,/Resources/Confetti-Clipart-PNG-Image-01.png" Grid.Row="0" HorizontalAlignment="Left" Height="1860" Margin="-140,-324,-388,-799" VerticalAlignment="Top" Width="1990" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.789"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Label  Grid.ColumnSpan="2" Content="Вие спечелихте!" 
+                HorizontalAlignment="Left" 
+                Height="201" 
+                Margin="466,66,0,0" 
+                VerticalAlignment="Top" 
+                Width="536"
+                FontSize="65"
+                Foreground="White"/>
+    </Grid>
+</Window>
