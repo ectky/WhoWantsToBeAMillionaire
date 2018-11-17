@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.App", "WhoWantsToBeAMillionaire\Game.App.csproj", "{C2E07DF7-824A-49D8-844E-5495DAC8AE7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Data", "Game.Data\Game.Data.csproj", "{35A09F5A-263C-4181-91D8-281C5CD15285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Models", "Game.Models\Game.Models.csproj", "{EEF0062A-C944-4121-9D45-0DBF13246B97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{C2E07DF7-824A-49D8-844E-5495DAC8AE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2E07DF7-824A-49D8-844E-5495DAC8AE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2E07DF7-824A-49D8-844E-5495DAC8AE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A09F5A-263C-4181-91D8-281C5CD15285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A09F5A-263C-4181-91D8-281C5CD15285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A09F5A-263C-4181-91D8-281C5CD15285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A09F5A-263C-4181-91D8-281C5CD15285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF0062A-C944-4121-9D45-0DBF13246B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF0062A-C944-4121-9D45-0DBF13246B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF0062A-C944-4121-9D45-0DBF13246B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF0062A-C944-4121-9D45-0DBF13246B97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
