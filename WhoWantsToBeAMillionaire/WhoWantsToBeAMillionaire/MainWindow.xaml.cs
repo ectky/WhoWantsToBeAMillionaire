@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Game.App.Contracts;
+using Game.App.Entities;
+using Game.Data.Services.Contracts;
+using System;
+using System.Media;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.IO;
-using System.Media;
-using System.Threading;
-using Game.App.Contracts;
-using Game.App.Entities;
 using WhoWantsToBeAMillionaire;
-using Game.Data.Services.Contracts;
 
 namespace Game.App
 {
@@ -46,34 +39,42 @@ namespace Game.App
         private string PrziesFourPicture = Source + "rewards.png";
         private string PrziesFivePicture = Source + "rewards.png";
 
-        private Engine engine;
-        private int levelCount;
-        private ILevel currentLevel;
-        private Button[] answers;
-
+        private readonly Engine engine;
+        private readonly Button[] answers;
         private readonly IPlayersService playersService;
         private readonly IGamesService gamesService;
 
-        public MainWindow(IPlayersService playersService, IGamesService gamesService)
+        private int levelCount;
+        private ILevel currentLevel;
+        private bool MusicOn;
+        private SoundPlayer currentSound;
+
+        public MainWindow(IPlayersService playersService, IGamesService gamesService, bool MusicOn)
         {
             InitializeComponent();
 
             this.playersService = playersService;
             this.gamesService = gamesService;
 
-            this.answers = new[] { AnswerA, AnswerB, AnswerC, AnswerD };
-            this.engine = new Engine();
-            this.levelCount = 0;
+            answers = new[] { AnswerA, AnswerB, AnswerC, AnswerD };
+            engine = new Engine();
+            levelCount = 0;
+            this.MusicOn = false;
+
+            PlaySound(StartQuestionSound);
+
+            this.MusicOn = MusicOn;
+
             LoadLevel();
         }
 
         private void LoadLevel()
         {
-            if (levelCount >= this.engine.Game.Size - 1)
+            if (levelCount >= engine.Game.Size - 1)
             {
-                EndGame end = new EndGame(playersService, gamesService);
+                EndGame end = new EndGame(playersService, gamesService, engine, MusicOn);
                 end.ShowDialog();
-                this.Close();
+                Close();
             }
             var regForm = new RegisterPlayer(playersService, gamesService);
 
@@ -81,26 +82,25 @@ namespace Game.App
 
             ResetJokers();
 
-            this.currentLevel = engine.Game.GetCurrentLevel(this.levelCount);
-            
+            currentLevel = engine.Game.GetCurrentLevel(levelCount);
+
             LoadQuestion();
 
-            this.levelCount++;
+            levelCount++;
         }
 
         private void LoadQuestion()
         {
             currentLevel.ChangeQuestion();
 
-            if (this.currentLevel.IsEndOfQuestions)
+            if (currentLevel.IsEndOfQuestions)
             {
-                YouWin youWin = new YouWin();
+                YouWin youWin = new YouWin(MusicOn);
                 youWin.ShowDialog();
                 LoadLevel();
             }
 
-            SoundPlayer sound = new SoundPlayer(StartQuestionSound);
-            sound.Play();
+            PlaySound(StartQuestionSound);
 
             ChangePrize();
 
@@ -119,7 +119,7 @@ namespace Game.App
                 PrziesFourPicture,
                 PrziesFivePicture
             };
-            string path = prizes[this.currentLevel.CurrentCount];
+            string path = prizes[currentLevel.CurrentCount];
 
             Fifty.BeginInit();
             Fifty.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
@@ -128,14 +128,14 @@ namespace Game.App
 
         private void GenerateAnswers(IQuestion currentQuestion)
         {
-            string[] letters = {"A: ", "B: ", "C: ", "D: "};
+            string[] letters = { "A: ", "B: ", "C: ", "D: " };
 
             currentQuestion.Shuffle();
 
             for (int i = 0; i < currentQuestion.Answers.Length; i++)
             {
-                this.answers[i].Content = letters[i] + currentQuestion.Answers[i];
-                this.answers[i].Background = Brushes.Black;
+                answers[i].Content = letters[i] + currentQuestion.Answers[i];
+                answers[i].Background = Brushes.Black;
             }
         }
 
@@ -164,8 +164,7 @@ namespace Game.App
         {
             string path = FiftyUsedPicture;
 
-            SoundPlayer sound = new SoundPlayer(FiftyFiftySound);
-            sound.Play();
+            PlaySound(FiftyFiftySound);
 
             Fifty.BeginInit();
             Fifty.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
@@ -174,15 +173,32 @@ namespace Game.App
             EliminateTwoAnswers();
         }
 
+        private void PlaySound(string soundDir, bool looping = false)
+        {
+            this.currentSound = new SoundPlayer(soundDir);
+
+            if (MusicOn)
+            {
+                if (looping)
+                {
+                    this.currentSound.PlayLooping();
+                }
+                else
+                {
+                    this.currentSound.Play();
+                }
+            }
+        }
+
         private void EliminateTwoAnswers()
         {
             Thread.Sleep(500);
-            foreach (var answer in this.answers)
+            foreach (var answer in answers)
             {
                 string buttonContent = answer.Content.ToString().Substring(3);
-                
-                if (!this.currentLevel.Current.IsRightAnswer(buttonContent) &&
-                    !this.currentLevel.Current.IsCloseAnswer(buttonContent))
+
+                if (!currentLevel.Current.IsRightAnswer(buttonContent) &&
+                    !currentLevel.Current.IsCloseAnswer(buttonContent))
                 {
                     answer.Content = string.Empty;
                 }
@@ -193,8 +209,8 @@ namespace Game.App
         {
             string path = AskTheAudienceUsedPicture;
 
-            SoundPlayer sound = new SoundPlayer(AskTheAudienceSound);
-            sound.PlayLooping();
+
+            PlaySound(AskTheAudienceSound, true);
 
             People.BeginInit();
             People.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
@@ -203,139 +219,79 @@ namespace Game.App
 
         private void AnswerA_Click(object sender, RoutedEventArgs e)
         {
-            AnswerA.Background = Brushes.Orange;
-            SoundPlayer sound1 = new SoundPlayer(FinalAnswerSound);
-            sound1.Play();
-            Thread.Sleep(8000);
-
             string answerA = AnswerA.Content.ToString().Substring(3);
-            if (this.currentLevel.Current.IsRightAnswer(answerA))
-            {
-                AnswerA.Background = Brushes.Green;
 
-                SoundPlayer sound = new SoundPlayer(RightAnswerSound);
-                sound.Play();
+            GenerateAnswerOutput(answerA, AnswerA);
+        }
+
+        private async void GenerateAnswerOutput(string answer, Button answerButton)
+        {
+            int miliSec = 7000;
+            PlaySound(FinalAnswerSound);
+
+            ColorButton(Brushes.Orange, answerButton);
+
+            await Task.Delay(miliSec);
+
+            if (currentLevel.Current.IsRightAnswer(answer))
+            {
+                PlaySound(RightAnswerSound);
+
+                ColorButton(Brushes.Green, answerButton);
+
+                await Task.Delay(miliSec);
 
                 //adds a point to the current players score
-                this.gamesService.AddPointToPlayersScore();
-
-                Thread.Sleep(10000);
+                gamesService.AddPointToPlayersScore();
 
                 LoadQuestion();
             }
             else
             {
-                AnswerA.Background = Brushes.Red;
+                PlaySound(WrongAnswerSound);
 
-                SoundPlayer sound = new SoundPlayer(WrongAnswerSound);
-                sound.Play();
+                ColorButton(Brushes.Red, answerButton);
 
-                Thread.Sleep(5000);
+                await Task.Delay(miliSec);
 
                 LoadLevel();
+            }
+        }
+
+        private async void ColorButton(SolidColorBrush color, Button answerButton)
+        {
+            int milisec = 200;
+
+            for (int i = 0; i < 15; i++)
+            {
+                answerButton.Background = Brushes.White;
+                answerButton.Foreground = Brushes.Black;
+                await Task.Delay(milisec);
+                answerButton.Background = color;
+                answerButton.Foreground = Brushes.White;
+                await Task.Delay(milisec);
             }
         }
 
         private void AnswerB_Click(object sender, RoutedEventArgs e)
         {
-            AnswerB.Background = Brushes.Orange;
-            SoundPlayer sound1 = new SoundPlayer(FinalAnswerSound);
-            sound1.Play();
-            Thread.Sleep(8000);
-
             string answerB = AnswerB.Content.ToString().Substring(3);
-            if (this.currentLevel.Current.IsRightAnswer(answerB))
-            {
-                AnswerB.Background = Brushes.Green;
-                SoundPlayer sound = new SoundPlayer(RightAnswerSound);
-                sound.Play();
 
-                //adds a point to the current players score
-                this.gamesService.AddPointToPlayersScore();
-
-                Thread.Sleep(10000);
-
-                LoadQuestion();
-            }
-            else
-            {
-                AnswerB.Background = Brushes.Red;
-
-                SoundPlayer sound = new SoundPlayer(WrongAnswerSound);
-                sound.Play();
-
-                Thread.Sleep(10000);
-
-                LoadLevel();
-            }
+            GenerateAnswerOutput(answerB, AnswerB);
         }
 
         private void AnswerC_Click(object sender, RoutedEventArgs e)
         {
-            AnswerC.Background = Brushes.Orange;
-            SoundPlayer sound1 = new SoundPlayer(FinalAnswerSound);
-            sound1.Play();
-            Thread.Sleep(8000);
-
             string answerC = AnswerC.Content.ToString().Substring(3);
-            if (this.currentLevel.Current.IsRightAnswer(answerC))
-            {
-                AnswerC.Background = Brushes.Green;
-                SoundPlayer sound = new SoundPlayer(RightAnswerSound);
-                sound.Play();
 
-                //adds a point to the current players score
-                this.gamesService.AddPointToPlayersScore();
-
-                Thread.Sleep(10000);
-
-                LoadQuestion();
-            }
-            else
-            {
-                AnswerC.Background = Brushes.Red;
-
-                SoundPlayer sound = new SoundPlayer(WrongAnswerSound);
-                sound.Play();
-
-                Thread.Sleep(5000);
-
-                LoadLevel();
-            }
+            GenerateAnswerOutput(answerC, AnswerC);
         }
 
         private void AnswerD_Click(object sender, RoutedEventArgs e)
         {
-            AnswerD.Background = Brushes.Orange;
-            SoundPlayer sound1 = new SoundPlayer(FinalAnswerSound);
-            sound1.Play();
-            Thread.Sleep(8000);
+            string answerD = AnswerD.Content.ToString().Substring(3);
 
-            string answerC = AnswerD.Content.ToString().Substring(3);
-            if (this.currentLevel.Current.IsRightAnswer(answerC))
-            {
-                AnswerD.Background = Brushes.Green;
-                SoundPlayer sound = new SoundPlayer(RightAnswerSound);
-                sound.Play();
-
-                //adds a point to the current players score
-                this.gamesService.AddPointToPlayersScore();
-
-                Thread.Sleep(10000);
-                LoadQuestion();
-
-            }
-            else
-            {
-                AnswerD.Background = Brushes.Red;
-
-                SoundPlayer sound = new SoundPlayer(WrongAnswerSound);
-                sound.Play();
-
-                Thread.Sleep(5000);
-
-                LoadLevel();
-            }
+            GenerateAnswerOutput(answerD, AnswerD);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -345,6 +301,19 @@ namespace Game.App
 
         private void Window_Activated(object sender, EventArgs e)
         {
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.MusicOn)
+            {
+                this.currentSound.Stop();
+            }
+            else
+            {
+                this.currentSound.Play();
+            }
+            MusicOn = !MusicOn;
         }
     }
 }

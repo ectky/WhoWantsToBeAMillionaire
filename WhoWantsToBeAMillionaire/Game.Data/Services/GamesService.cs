@@ -1,6 +1,8 @@
 ﻿using Game.Data.Services.Contracts;
 using Game.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Game.Data.Services
 {
@@ -24,6 +26,11 @@ namespace Game.Data.Services
             this.CurrentGame.Score++;
 
             this.context.SaveChanges();
+        }
+
+        public ICollection<Models.Game> GetLastGames(int number)
+        {
+           return this.context.Games.OrderByDescending(g => g.PlayedOn).Take(number).ToList();
         }
 
         public void LogGame()

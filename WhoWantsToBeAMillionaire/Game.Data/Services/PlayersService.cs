@@ -19,7 +19,7 @@ namespace Game.Data.Services
         {
             if (context.Players.Any(p => p.Username == username))
             {
-                this.CurrentPlayer = context.Players.First(p => p.Username == username);
+                CurrentPlayer = context.Players.First(p => p.Username == username);
                 return;
             }
 
@@ -28,8 +28,11 @@ namespace Game.Data.Services
                 Username = username
             };
 
-            this.context.Players.Add(player);
-            this.context.SaveChanges();
+            context.Players.Add(player);
+
+            CurrentPlayer = player;
+
+            context.SaveChanges();
         }
     }
 }

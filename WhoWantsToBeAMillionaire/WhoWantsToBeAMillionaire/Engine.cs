@@ -32,6 +32,11 @@ namespace Game.App
             this.Game = LoadGame();
         }
 
+        public int GetCountOfLevels()
+        {
+            return this.countOfLevels;
+        }
+
         private void SetCounts()
         {
             string file = questionsTxt;

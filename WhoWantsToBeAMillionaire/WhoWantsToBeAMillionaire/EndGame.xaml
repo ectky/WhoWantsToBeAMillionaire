@@ -12,11 +12,25 @@
     </Window.Background>
     <Grid>
         <Image Source="pack://application:,,,/Resources/logo.png"
-               Grid.Row="0" HorizontalAlignment="Left" Height="631" Margin="406,35,0,0" VerticalAlignment="Top" Width="646"/>
+               Grid.Row="0" HorizontalAlignment="Left" Height="630" Margin="10,0,0,0" VerticalAlignment="Top" Width="646"/>
         <Image Source="pack://application:,,,/Resources/logoTvoqChas.jpg" Grid.Row="0" 
                HorizontalAlignment="Left" Height="101" VerticalAlignment="Top" Width="261" Margin="1057,0,0,0"/>
-        <Button Content="Играй отново" HorizontalAlignment="Center" Margin="500,319,0,0" 
+        <DataGrid AutoGenerateColumns="False" 
+          Height="258" 
+          HorizontalAlignment="Left" 
+           Name="dataGridTable"
+          VerticalAlignment="Top" 
+          Width="595" Margin="723,127,0,0">
+            <DataGrid.Columns >
+                <DataGridTextColumn Binding="{Binding Path=Rank}" MinWidth="50" />
+                <DataGridTextColumn Binding="{Binding Path=Username}" MinWidth="50" />
+                <DataGridTextColumn Binding="{Binding Path=Score}" MinWidth="50" />
+                <DataGridTextColumn Binding="{Binding Path=PlayedOn}" MinWidth="50" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Играй отново" HorizontalAlignment="Center" Margin="723,464,144,66" 
                 VerticalAlignment="Center" Width="595" Height="206" 
                 Background="Black" Foreground="White" FontSize="36" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1369,71,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
     </Grid>
 </Window>

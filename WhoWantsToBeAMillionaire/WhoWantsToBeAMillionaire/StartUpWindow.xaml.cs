@@ -31,22 +31,56 @@ namespace Game.App
         private readonly IPlayersService playersService;
         private readonly IGamesService gamesService;
 
+        private bool MusicOn;
+        private SoundPlayer currentSound;
+
         public StartUpWindow()
         {
             InitializeComponent();
-            sound = new SoundPlayer
-                (mainthemeSound);
-            sound.Play();
+
+            this.MusicOn = true;
+
+            PlaySound(mainthemeSound);
 
             this.playersService = new PlayersService();
             this.gamesService = new GamesService(playersService);
         }
 
+        private void PlaySound(string soundDir, bool looping = false)
+        {
+            this.currentSound = new SoundPlayer(soundDir);
+
+            if (MusicOn)
+            {
+                if (looping)
+                {
+                    this.currentSound.PlayLooping();
+                }
+                else
+                {
+                    this.currentSound.Play();
+                }
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow(playersService, gamesService);
+            MainWindow main = new MainWindow(playersService, gamesService, MusicOn);
             main.Show();
             this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (this.MusicOn)
+            {
+                this.currentSound.Stop();
+            }
+            else
+            {
+                this.currentSound.Play();
+            }
+            this.MusicOn = !this.MusicOn;
         }
     }
 }

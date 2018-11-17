@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Game.App"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="YouWin" Height="767" Width="1470" Activated="Window_Activated">
 
     <Window.Background>
@@ -48,5 +49,6 @@
                 Width="536"
                 FontSize="65"
                 Foreground="White"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="388,61,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

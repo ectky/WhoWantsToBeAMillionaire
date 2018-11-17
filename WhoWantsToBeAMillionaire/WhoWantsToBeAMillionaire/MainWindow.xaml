@@ -62,5 +62,6 @@
         </Label>
         <Canvas Margin="191,46,187,254" Grid.Row="1" Grid.ColumnSpan="2"/>
         <TextBlock Name="QuestionLabel"  HorizontalAlignment="Left" Margin="191,46,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="68" Width="1061" Foreground="#FFFDFDFD" FontSize="18" Grid.ColumnSpan="2"/>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="493,23,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

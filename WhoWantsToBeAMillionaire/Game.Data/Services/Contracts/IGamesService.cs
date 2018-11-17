@@ -1,4 +1,6 @@
-﻿namespace Game.Data.Services.Contracts
+﻿using System.Collections.Generic;
+
+namespace Game.Data.Services.Contracts
 {
     public interface IGamesService
     {
@@ -6,5 +8,6 @@
 
         void LogGame();
         void AddPointToPlayersScore();
+        ICollection<Models.Game> GetLastGames(int number);
     }
 }

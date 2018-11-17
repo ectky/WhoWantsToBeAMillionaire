@@ -23,16 +23,55 @@ namespace Game.App
     /// </summary>
     public partial class YouWin : Window
     {
-        public YouWin()
+        private static string Source = DirectoryProvider.CurrentDirectory();
+
+        private string YouWinSound = Source + "win.wav";
+
+        private bool MusicOn;
+        private SoundPlayer currentSound;
+
+        public YouWin(bool MusicOn)
         {
             InitializeComponent();
+
+            PlaySound(YouWinSound);
+
+            this.MusicOn = MusicOn;
         }
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            SoundPlayer sound1 = new SoundPlayer
-                (DirectoryProvider.CurrentDirectory() + "win.wav");
-            sound1.Play();
+            PlaySound(YouWinSound);
+        }
+
+        private void PlaySound(string soundDir, bool looping = false)
+        {
+            this.currentSound = new SoundPlayer(soundDir);
+
+            if (MusicOn)
+            {
+                if (looping)
+                {
+                    this.currentSound.PlayLooping();
+                }
+                else
+                {
+                    this.currentSound.Play();
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.MusicOn)
+            {
+                this.currentSound.Stop();
+            }
+            else
+            {
+                this.currentSound.Play();
+            }
+            this.MusicOn = !this.MusicOn;
         }
     }
 }

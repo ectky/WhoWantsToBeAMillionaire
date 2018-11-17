@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExtensionMethods\ExtensionMethods.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="RegisterPlayer.xaml.cs">
       <DependentUpon>RegisterPlayer.xaml</DependentUpon>
@@ -62,6 +63,7 @@
     <Compile Include="StartUpWindow.xaml.cs">
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="YouWin.xaml.cs">
       <DependentUpon>YouWin.xaml</DependentUpon>
     </Compile>
