@@ -2,6 +2,6 @@
 {
     public static class Configuration
     {
-        public const string ConnectionString = @"Server=ELLIE\SQLEXPRESS;Database=…;Integrated Security=True";
+        public const string ConnectionString = @"Server=ELLIE\SQLEXPRESS;Database=Game;Integrated Security=True";
     }
 }

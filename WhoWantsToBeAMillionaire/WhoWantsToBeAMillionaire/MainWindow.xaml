@@ -6,26 +6,30 @@
         xmlns:local="clr-namespace:Game.App"
         mc:Ignorable="d"
         Title="MainWindow"
-        WindowState="Maximized" d:DesignWidth="1470.405" d:DesignHeight="767.131" Closed="Window_Closed">
+        WindowState="Maximized" d:DesignWidth="1470.405" d:DesignHeight="767.131" Closed="Window_Closed" Activated="Window_Activated">
     <Window.Background>
         <ImageBrush ImageSource="pack://application:,,,/Resources/background.jpg"></ImageBrush>
     </Window.Background>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="871*"/>
+            <ColumnDefinition Width="591*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Source="pack://application:,,,/Resources/person-male.png"
-               Grid.Row="0"/>
+               Grid.Row="0" Grid.ColumnSpan="2"/>
         <Image Source="pack://application:,,,/Resources/fifty.png"
             Grid.Row="0" Name="Fifty"  MouseDown="fiftyHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,23,0,0"/>
         <Image Source="pack://application:,,,/Resources/question.png"
-               Grid.Row="1" Margin="0,0,0,200"/>
+               Grid.Row="1" Margin="0,0,0,200" Grid.ColumnSpan="2"/>
         <Image Source="Resources/people.png"
                Grid.Row="0" Name="People"  MouseDown="peopleHelper_MouseDown" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Margin="22,119,0,0"/>
         <Image Source="pack://application:,,,/Resources/logoTvoqChas.jpg" Grid.Row="0" 
-               HorizontalAlignment="Left" Height="101" VerticalAlignment="Top" Width="261" Margin="1046,0,0,0"/>
-        <Image Name="Prizes" Source="pack://application:,,,/Resources/rewards.png" Grid.Row="0" Height="192" VerticalAlignment="Top" Width="472" Margin="990,119,0,0" HorizontalAlignment="Left"/>
+               HorizontalAlignment="Left" Height="101" VerticalAlignment="Top" Width="261" Margin="174.785,0,0,0" Grid.Column="1"/>
+        <Image Name="Prizes" Source="pack://application:,,,/Resources/rewards.png" Grid.Row="0" Height="192" VerticalAlignment="Top" Width="472" Margin="118.785,119,0,0" HorizontalAlignment="Left" Grid.Column="1"/>
         <Button Content="Button" Name="AnswerA"  HorizontalAlignment="Left" Margin="99,192,0,0" 
                 Grid.Row="1" VerticalAlignment="Top" Width="535" Background="Black" 
                 Height="48" Foreground="White" BorderBrush="#FF668DC9" FontSize="18" 
@@ -36,7 +40,7 @@
                 Margin="740,192,0,0" Grid.Row="1" VerticalAlignment="Top" 
                 Width="535" Background="Black" Height="48" Foreground="White" 
                 BorderBrush="#FF668DC9" FontSize="18" BorderThickness="6,5,5,5" 
-                Click="AnswerB_Click"/>
+                Click="AnswerB_Click" Grid.ColumnSpan="2"/>
         <Button Content="Button" Name="AnswerC" HorizontalAlignment="Left" 
                 Margin="99,268,0,0" Grid.Row="1" VerticalAlignment="Top" Width="535" 
                 Background="Black" Height="48" Foreground="White" BorderBrush="#FF668DC9" 
@@ -46,17 +50,17 @@
                 Margin="740,268,0,0" Grid.Row="1" VerticalAlignment="Top" Width="535" 
                 Background="Black" Height="48" Foreground="White" BorderBrush="#FF668DC9" 
                 FontSize="18" BorderThickness="6,5,5,5" 
-                Click="AnswerD_Click"/>
+                Click="AnswerD_Click" Grid.ColumnSpan="2"/>
 
-        <Label Content="Математика не за всеки XIA клас" Margin="0,321,10,5" Grid.Row="1" 
+        <Label Content="Математика не за всеки XIA клас" Margin="507,321,517,5" Grid.Row="1" 
                VerticalAlignment="Center" Foreground="White" Height="42" Width="438" 
                FontSize="22" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" 
-               HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+               HorizontalAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <Canvas Margin="191,46,187,254" Grid.Row="1"/>
-        <TextBlock Name="QuestionLabel"  HorizontalAlignment="Left" Margin="191,46,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="68" Width="1061" Foreground="#FFFDFDFD" FontSize="18"/>
+        <Canvas Margin="191,46,187,254" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBlock Name="QuestionLabel"  HorizontalAlignment="Left" Margin="191,46,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="68" Width="1061" Foreground="#FFFDFDFD" FontSize="18" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

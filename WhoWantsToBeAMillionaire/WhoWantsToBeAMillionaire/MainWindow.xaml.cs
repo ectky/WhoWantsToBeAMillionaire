@@ -16,6 +16,7 @@ using System.Media;
 using System.Threading;
 using Game.App.Contracts;
 using Game.App.Entities;
+using WhoWantsToBeAMillionaire;
 
 namespace Game.App
 {
@@ -52,7 +53,7 @@ namespace Game.App
         public MainWindow()
         {
             InitializeComponent();
-            
+
             this.answers = new[] { AnswerA, AnswerB, AnswerC, AnswerD };
             this.engine = new Engine();
             this.levelCount = 0;
@@ -67,6 +68,9 @@ namespace Game.App
                 end.ShowDialog();
                 this.Close();
             }
+            var regForm = new RegisterPlayer();
+
+            regForm.ShowDialog();
 
             ResetJokers();
 
@@ -316,6 +320,10 @@ namespace Game.App
         private void Window_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
         }
     }
 }

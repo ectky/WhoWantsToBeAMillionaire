@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.App.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -21,13 +22,16 @@ namespace Game.App
     /// </summary>
     public partial class StartUpWindow : Window
     {
-        private SoundPlayer sound;
+        private static string Source = DirectoryProvider.CurrentDirectory();
+
+        private string mainthemeSound = Source + "main theme.wav";
+        private readonly SoundPlayer sound;
 
         public StartUpWindow()
         {
             InitializeComponent();
             sound = new SoundPlayer
-                (@"D:\VSProjects\WhoWantsToBecomeAMillionaire\Game.App\Resources\main theme.wav");
+                (mainthemeSound);
             sound.Play();
         }
 

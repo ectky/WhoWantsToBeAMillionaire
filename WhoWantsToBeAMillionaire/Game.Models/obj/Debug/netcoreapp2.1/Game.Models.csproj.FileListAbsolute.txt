@@ -1,9 +1,0 @@
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\bin\Debug\netcoreapp2.1\Game.Models.deps.json
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\bin\Debug\netcoreapp2.1\Game.Models.dll
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\bin\Debug\netcoreapp2.1\Game.Models.pdb
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.csprojAssemblyReference.cache
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.csproj.CoreCompileInputs.cache
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.AssemblyInfoInputs.cache
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.AssemblyInfo.cs
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.dll
-D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\netcoreapp2.1\Game.Models.pdb

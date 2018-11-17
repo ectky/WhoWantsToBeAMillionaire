@@ -56,6 +56,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Reader.cs" />
+    <Compile Include="RegisterPlayer.xaml.cs">
+      <DependentUpon>RegisterPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Contracts\IPlayersService.cs" />
+    <Compile Include="Services\PlayersService.cs" />
     <Compile Include="StartUpWindow.xaml.cs">
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
@@ -99,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RegisterPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartUpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,6 +178,12 @@
     <Resource Include="Resources\rewards2.png" />
     <Content Include="Resources\win.wav" />
     <Content Include="Resources\wrong answer.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Game.Data\Game.Data.csproj">
+      <Project>{12576190-94dc-4a00-891a-272701281309}</Project>
+      <Name>Game.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

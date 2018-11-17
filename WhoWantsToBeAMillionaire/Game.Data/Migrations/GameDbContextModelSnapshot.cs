@@ -19,7 +19,7 @@ namespace Game.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Game.Models.Player", b =>
+            modelBuilder.Entity("Game.Models.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -27,13 +27,36 @@ namespace Game.Data.Migrations
 
                     b.Property<DateTime>("PlayedOn");
 
+                    b.Property<int>("PlayerId");
+
                     b.Property<int>("Score");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("Game.Models.Player", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Game.Models.Game", b =>
+                {
+                    b.HasOne("Game.Models.Player", "Player")
+                        .WithMany("Games")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

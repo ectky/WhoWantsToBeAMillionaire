@@ -1,6 +1,10 @@
 ﻿using Game.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Game.Data
 {
@@ -17,6 +21,7 @@ namespace Game.Data
         }
 
         public DbSet<Player> Players { get; set; }
+        public DbSet<Game.Models.Game> Games { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

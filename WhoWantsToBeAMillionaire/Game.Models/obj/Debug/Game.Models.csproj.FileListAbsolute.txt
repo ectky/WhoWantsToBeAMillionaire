@@ -1,0 +1,6 @@
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\bin\Debug\Game.Models.dll
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\bin\Debug\Game.Models.pdb
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\Game.Models.csprojAssemblyReference.cache
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\Game.Models.csproj.CoreCompileInputs.cache
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\Game.Models.dll
+D:\VSProjects\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\WhoWantsToBeAMillionaire\Game.Models\obj\Debug\Game.Models.pdb
